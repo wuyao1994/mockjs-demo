@@ -13,12 +13,7 @@ const Routers = function ({ history, app }) {
   const routes = [
     {
       path: '/',
-      component: App,
-      getIndexRoute (nextState, cb) {
-          require.ensure([], require => {
-              cb(null, require('./routes/List'))
-          }, 'List')
-      },
+      component: App
     },
   ]
 
