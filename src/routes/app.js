@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import {connect} from "dva";
 import List from './list'
 import Modal from './modal'
+import { Spin } from 'antd'
+import styles from './app.less'
 
 function App({ children,dispatch, app, loading }) {
     const { list,modalVisible,modalType,currentItem } = app;
     const listProps = {
-        loading:loading.effects['app/query'],
+        loading:loading,
         dataSource:list,
         onAdd () {
             dispatch({
@@ -37,7 +39,7 @@ function App({ children,dispatch, app, loading }) {
         item: modalType === 'create' ? {} : currentItem,
         visible: modalVisible,
         maskClosable: false,
-        confirmLoading: loading.effects['app/update'],
+        // confirmLoading: loading.effects['app/update'],
         title: `${modalType === 'create' ? 'Create Mapping' : 'Update Mapping'}`,
         wrapClassName: 'vertical-center-modal',
         onOk (data) {
@@ -52,12 +54,13 @@ function App({ children,dispatch, app, loading }) {
             })
         },
     }
-
     return (
-        <div>
+    <Spin spinning={loading.global} className={styles.example}>
+        <div className={loading.global ? styles.app: ''}>
             <List {...listProps} />
             {modalVisible && <Modal {...modalProps} />}
         </div>
+    </Spin>
     )
 }
 

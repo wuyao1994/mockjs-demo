@@ -39,7 +39,7 @@ function List ({onDeleteItem, onEditItem, dataSource, loading,onAdd}){
     return (
         <div>
             <Button className="editable-add-btn" onClick={onAdd}>Add</Button>
-            <Table bordered dataSource={dataSource} loading={loading} columns={columns} />
+            <Table bordered dataSource={dataSource} columns={columns} />
         </div>
     );
 
